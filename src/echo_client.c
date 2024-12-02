@@ -87,23 +87,6 @@ int main(int argc, char* argv[])
             memset(buf, 0, BUF_SIZE);
     }
     
-    /*fd_in = open(argv[3], O_RDONLY);
-	if(fd_in < 0) {
-		printf("Failed to open the file\n");
-		return 0;
-	}
-    readRet = read(fd_in, buf, BUF_SIZE);
-    fprintf(stdout, "===========  Sending   ========= \n%s", buf);
-    send(sock, buf , readRet, 0);
-    //fprintf(stdout, "===========  Sending   ========= \n%s", buf);
-    
-    memset(buf, 0, BUF_SIZE);
-    if((bytes_received = recv(sock, buf, BUF_SIZE, 0)) > 1)
-    {
-        buf[bytes_received] = '\0';
-        fprintf(stdout, "===========  Received  ========= \n%s", buf);
-    }
-    */
     freeaddrinfo(servinfo);
     close(sock);    
     return EXIT_SUCCESS;
