@@ -421,103 +421,10 @@ int main(int argc, char* argv[])
             }
         }
     
-        //cli_size = sizeof(cli_addr);
-        //if ((client_sock = accept(sock, (struct sockaddr *) &cli_addr,
-        //                            &cli_size)) == -1)
-        //{
-        //    close(sock);
-        //    fprintf(stderr, "Error accepting connection.\n");
-        //    return EXIT_FAILURE;
-        //}
-
-        //readret = 0;
-        //int i = 0;
-        /*
-        int keep_alive = 1; 
-        while(keep_alive){
-            memset(buf, 0, BUF_SIZE);
-            readret = recv(client_sock, buf, BUF_SIZE, 0);
-            if(readret == 0){
-                close(sock);
-                fprintf(stderr, "Error accepting connection.\n");
-                return EXIT_SUCCESS;
-            };
-            
-            if (readret <= 0){break;}
-            fprintf(stdout, "===========  Server Received  ========= \n%s", buf);
-            Requests *Reques = chunked_parse(buf, readret);
-            Requests *p = Reques;
-            int i = 0;
-            while(p != NULL)
-            {
-                Request *request = p->current_request;
-                if(!request){
-                    if(do_error_respon(Bad, buf, client_sock, sock))
-                    {
-                        return EXIT_FAILURE;
-                    };
-                    p = (Requests *)p->next_request;
-                    continue;
-                }
-                char vision[] = "HTTP/1.1";
-                if(memcmp(request->http_version, vision, strlen(vision)) || request->http_version[strlen(vision)] != '\0')
-                {
-                    if(do_error_respon(Version_not_supported, buf, client_sock, sock))
-                    {
-                        return EXIT_FAILURE;
-                    };
-                    p = (Requests *)p->next_request;
-                    continue;
-                }
-                char keepalive[] = "keep-alive";
-                // *识别为 keep-alive 时
-                if(!memcmp(request->headers[1].header_value,keepalive,strlen(keepalive)))
-                {
-                    char* meth = request->http_method;
-                    int method_type = checkmethod(meth);
-                    if(method_type){
-                        i++;
-                        if(do_200_respon(request, buf, client_sock, sock))
-                        {
-                            return EXIT_FAILURE;
-                        };
-                        p = (Requests *)p->next_request;
-                        continue;
-                    }else{
-                        if(do_error_respon(Not_Implemented, buf, client_sock, sock))
-                        {
-                            return EXIT_FAILURE;
-                        };
-                        p = (Requests *)p->next_request;
-                        continue;
-                    }
-                }
-                // *没有识别为 keep-alive 时
-                else{
-                    keep_alive = 0;
-                }
-                    i++;
-                    p = (Requests *)p->next_request;
-   
-            }
-            
-        }*/
+        
 
     }
-    /*if (readret == -1)
-    {
-        close_socket(client_sock);
-        close_socket(sock);
-        fprintf(stderr, "Error reading from client socket.\n");
-        return EXIT_FAILURE;
-    }
-
-    if (close_socket(client_sock))
-    {
-        close_socket(sock);
-        fprintf(stderr, "Error closing client socket.\n");
-        return EXIT_FAILURE;
-    }*/
+    
     
     
     close_socket(sock);
