@@ -1,0 +1,7 @@
+{
+  "name": "Lis",
+  "image": "my_image_name",  // 替换为你的镜像名称
+  "workspaceFolder": "/workspace",  // 容器内的工作目录
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+  "remoteUser": "root"
+}

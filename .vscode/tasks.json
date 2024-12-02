@@ -1,0 +1,121 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "make", // 定义一个叫 make 的任务
+            "type": "shell",
+            "command": "make", // 执行 make 命令
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [], // 如果需要解析错误，可配置 "$gcc"
+            "detail": "执行 Makefile 构建项目。"
+        },
+
+        {
+            "label": "clean_client", // 清理任务
+            "type": "shell",
+            "command": "rm",
+            "args": [
+                "-f", // 强制删除
+                "${workspaceFolder}/echo_client" // 可执行文件路径
+            ],
+            "problemMatcher": [],
+            "detail": "清理旧的编译输出文件。"
+        },
+        {
+            "label": "clean_server", // 清理任务
+            "type": "shell",
+            "command": "rm",
+            "args": [
+                "-f", // 强制删除
+                "${workspaceFolder}/echo_server" // 可执行文件路径
+            ],
+            "problemMatcher": [],
+            "detail": "清理旧的编译输出文件。"
+        },
+        {
+            "label": "clean_example", // 清理任务
+            "type": "shell",
+            "command": "rm",
+            "args": [
+                "-f", // 强制删除
+                "${workspaceFolder}/example" // 可执行文件路径
+            ],
+            "problemMatcher": [],
+            "detail": "清理旧的编译输出文件。"
+        },
+
+
+
+
+
+
+        {
+            "label": "build-echo-client", // 构建任务
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "-Wall",
+                "-g", // 调试符号
+                "-I", "${workspaceFolder}/include", // 指定 include 文件夹
+                "${workspaceFolder}/src/echo_client.c", // 源文件路径
+                "-o", "${workspaceFolder}/echo_client" // 可执行文件路径
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],
+            "dependsOn": "clean_client", // 在编译前先执行清理任务
+            "detail": "构建 echo_client 的任务。"
+        },
+
+
+
+        {
+            "label": "build-echo-server", // 构建任务
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "-Wall",
+                "-g", // 调试符号
+                "-I", "${workspaceFolder}/include", // 指定 include 文件夹
+                "${workspaceFolder}/src/echo_server.c", // 源文件路径
+                "${workspaceFolder}/src/parse.c", 
+                "${workspaceFolder}/src/y.tab.c",
+                "${workspaceFolder}/src/lex.yy.c",
+                "-o", "${workspaceFolder}/echo_server" // 可执行文件路径
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],
+            "dependsOn": "clean_server", // 在编译前先执行清理任务
+            "detail": "构建 echo_server 的任务。"
+        },
+
+        {
+            "label": "build-echo-example", // 构建任务
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "-Wall",
+                "-g", // 调试符号
+                "-I", "${workspaceFolder}/include", // 指定 include 文件夹
+                "${workspaceFolder}/src/example.c", // 源文件路径
+                "${workspaceFolder}/src/parse.c",
+                "-o", "${workspaceFolder}/example" // 可执行文件路径
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],
+            "dependsOn": "clean_example", // 在编译前先执行清理任务
+            "detail": "构建 example 的任务。"
+        }
+    ]
+}

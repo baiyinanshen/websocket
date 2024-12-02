@@ -1,0 +1,28 @@
+{
+    "files.associations": {
+        "unistd.h": "c",
+        "fcntl.h": "c",
+        "stat.h": "c",
+        "parse.h": "c",
+        "stdio.h": "c",
+        "stdlib.h": "c",
+        "string.h": "c",
+        "ip.h": "c",
+        "in.h": "c",
+        "netdb.h": "c",
+        "socket.h": "c",
+        "types.h": "c",
+        "y.tab.h": "c"
+    },
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "C_Cpp.default.configurationProvider": "ms-vscode.cpptools",
+    "C_Cpp.default.includePath": [
+        "/usr/include",
+        "/usr/local/include",
+        "${workspaceFolder}/include"
+    ],
+    "C_Cpp.errorSquiggles": "enabled",
+    "C_Cpp.intelliSenseEngine": "default",
+    
+    
+}

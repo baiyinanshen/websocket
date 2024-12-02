@@ -1,0 +1,68 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "client Debug",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/echo_client",
+            "args": ["127.0.0.1", "9999", "samples/request_get"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build-echo-client" // 调试前运行构建任务
+        },
+        {
+            "name": "server Debug",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/echo_server",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build-echo-server" // 调试前运行构建任务
+        },
+        {
+            "name": "example Debug",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/example",
+            "args": ["./samples/request_get"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "make" // 调试前运行构建任务
+        }
+    ]
+}
