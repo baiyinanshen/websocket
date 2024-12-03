@@ -35,7 +35,7 @@ int close_socket(int sock)
     return 0;
 }
 enum{
-        Bad = 0, Not_Found, Not_Implemented, Version_not_supported  // BAD_REQ = 1 , UNDEFINED_REQ = 2 三种请求类型： Echo、没实现、格式错误
+        Bad = 0, Not_Found, Not_Implemented, Version_not_supported ,HEAD // BAD_REQ = 1 , UNDEFINED_REQ = 2 三种请求类型： Echo、没实现、格式错误
     };
 
 enum{
@@ -46,7 +46,8 @@ char *respon[] = {
                     "HTTP/1.1 400 Bad request\r\n\r\n",
                     "HTTP/1.1 404 Not Found\r\n\r\n",
                     "HTTP/1.1 501 Not Implemented\r\n\r\n",
-                    "HTTP/1.1 505 HTTP Version not supported\r\n\r\n"
+                    "HTTP/1.1 505 HTTP Version not supported\r\n\r\n",
+                    "HTTP/1.1 200 OK\r\n\r\n"//只针对HEAD
                     };
 long get_file_size(int fd) {
     off_t current_pos = lseek(fd, 0, SEEK_CUR);  // 获取当前文件指针位置
@@ -260,7 +261,7 @@ int checkmethod(char*a){
 int deal_respon(char *buf, int i, int readret, int sock, fd_set *master_fds){
     // 处理客户端数据
     //handle_client(i);
-    int keep_alive = 1; 
+    //int keep_alive = 1; 
     
     memset(buf, 0, BUF_SIZE);
     readret = recv(i, buf, BUF_SIZE, 0);
@@ -278,7 +279,7 @@ int deal_respon(char *buf, int i, int readret, int sock, fd_set *master_fds){
         return EXIT_FAILURE;}
     fprintf(stdout, "===========  Server Received  ========= \n%s", buf);
     Requests *Reques = chunked_parse(buf, readret);
-    memset(buf, 0, BUF_SIZE); 
+    //memset(buf, 0, BUF_SIZE); 
     Requests *p = Reques;
     //int i = 0;
     while(p != NULL)
@@ -310,11 +311,31 @@ int deal_respon(char *buf, int i, int readret, int sock, fd_set *master_fds){
         }
             // *没有识别为 keep-alive 时
         else{
-            keep_alive = 0;
+            //keep_alive = 0;
         }
         char* meth = request->http_method;
         int method_type = checkmethod(meth);
         if(method_type){
+            if(method_type == 2){
+                if (send(i, buf, strlen(buf), 0) != strlen(buf))
+            {
+                close_socket(i);
+                fprintf(stderr, "Error sending to client.\n");
+                return EXIT_FAILURE;
+            }
+            p = (Requests *)p->next_request;
+            memset(buf, 0, BUF_SIZE);  
+            continue;
+            }
+            if(method_type == 3){
+                if(do_error_respon(HEAD, buf, i, sock)){
+                    return EXIT_FAILURE;
+                };
+            p = (Requests *)p->next_request;
+            memset(buf, 0, BUF_SIZE);  
+            continue;
+            }
+
             //i++;
             if(do_200_respon(request, buf, i, sock))
             {
