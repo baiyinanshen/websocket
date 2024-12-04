@@ -5,8 +5,6 @@
  ******************************************************************************/
 
 
-#define _POSIX_C_SOURCE 199309
-
 /* daemonize includes */
 #include <fcntl.h>
 #include <signal.h>
@@ -17,7 +15,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#define F_TLOCK 1
+
 /***** Utility Functions *****/
 
 /**

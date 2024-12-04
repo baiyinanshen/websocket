@@ -12,7 +12,9 @@
         "netdb.h": "c",
         "socket.h": "c",
         "types.h": "c",
-        "y.tab.h": "c"
+        "y.tab.h": "c",
+        "signal.h": "c",
+        "syslog.h": "c"
     },
     "terminal.integrated.defaultProfile.linux": "bash",
     "C_Cpp.default.configurationProvider": "ms-vscode.cpptools",
@@ -23,6 +25,9 @@
     ],
     "C_Cpp.errorSquiggles": "enabled",
     "C_Cpp.intelliSenseEngine": "default",
+    //"C_Cpp.intelliSenseEngineFallback": "Disabled",
+    //"C_Cpp.intelliSenseEngine": "Tag Parser"
+    
     
     
 }
