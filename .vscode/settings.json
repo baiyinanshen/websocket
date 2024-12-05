@@ -14,7 +14,8 @@
         "types.h": "c",
         "y.tab.h": "c",
         "signal.h": "c",
-        "syslog.h": "c"
+        "syslog.h": "c",
+        "errno.h": "c"
     },
     "terminal.integrated.defaultProfile.linux": "bash",
     "C_Cpp.default.configurationProvider": "ms-vscode.cpptools",
